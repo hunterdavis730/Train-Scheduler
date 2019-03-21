@@ -1,0 +1,16 @@
+body {
+    background-image: url(Images/mateo-broquedis-536709-unsplash.jpg);
+    background-size: cover;
+}
+
+tbody>tr:hover {
+    background-color: rgb(56, 230, 230);
+    color: white;
+    transform: scale(1.01);
+}
+
+.jumbotron {
+    background-color: rgb(56, 230, 230);
+    color: white;
+
+}
