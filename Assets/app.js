@@ -10,6 +10,15 @@ firebase.initializeApp(config);
 
 database = firebase.database();
 
+const apiKey = "67997f00fbc415dd5ef417058e3e48ed";
+
+const apiId = 'e48b0eb8';
+
+var queryUrl = `http://transportapi.com/v3/uk/places.json?query=euston&type=train_station&app_id=${apiId}&app_key=${apiKey}`
+
+
+
+
 var trainName = '';
 
 var destination = '';
@@ -17,6 +26,7 @@ var destination = '';
 var firstTrain = '';
 
 var trainFrequency = 0;
+
 
 
 
@@ -41,12 +51,26 @@ database.ref().on('child_added', function (childSnap) {
 
     var scheduleFormat = "hh:mm";
 
-    var convertedSchedule = moment(firstTrain, scheduleFormat);
+    var convertedFirstTrainSchedule = moment(firstTrain, scheduleFormat).subtract(1, "years");
 
-    console.log(convertedSchedule)
+    console.log(convertedFirstTrainSchedule)
+
+    var currentTime = moment().format("hh:mm");
+
+    var diffTime = moment().diff(moment(convertedFirstTrainSchedule), "minutes");
+    console.log(diffTime)
+
+    var timeRemaining = diffTime % trainFrequency;
+
+    var minutesUntilTrain = trainFrequency - timeRemaining;
 
 
-    console.log(typeof trainFrequency)
+
+    var nextTrain = moment().add(minutesUntilTrain, "minutes");
+
+
+
+    console.log(nextTrain)
 
 
 
@@ -55,8 +79,8 @@ database.ref().on('child_added', function (childSnap) {
         $('<td>').text(trainName),
         $('<td>').text(destination),
         $('<td>').text(trainFrequency + ' minutes'),
-        $('<td>').text('N/A'),
-        $('<td>').text('N/A')
+        $('<td>').text(nextTrain.format("h:mm a")),
+        $('<td>').text(`${minutesUntilTrain} minutes`)
     );
 
     $("#train-schedule > tbody").append(newRow);
