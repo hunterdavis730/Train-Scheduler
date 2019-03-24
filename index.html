@@ -7,13 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="Assets/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
+
+
+
 
         <div class="jumbotron jumbotron-fluid rounded py-2">
             <div class="container">
@@ -34,6 +38,7 @@
                             <th scope="col">Frequency <i class="fas fa-stopwatch ml-2"></i></th>
                             <th scope="col">Next Arrival <i class="far fa-clock ml-2"></i></th>
                             <th scope="col">Minutes Away <i class="fas fa-hourglass-half ml-2"></i></th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -48,14 +53,18 @@
 
 
 
+        <!-- Custom Train Form  -->
 
-        <div class="card bg-light">
+        <div class="card bg-light ">
             <div class="card-body ">
-                <h4 class="card-title text-dark">Add Train </h4>
-                <form class="bg-light shadow-lg p-3 mb-2 bg-white rounded">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title text-dark d-inline">Add Train </h4>
+                    <!-- <button class="btn btn-success d-inline mb-2">Switch to UK</button> -->
+                </div>
+                <form class="bg-light shadow-lg p-3 mb-2 mt-3 bg-white rounded">
                     <div class="form-group">
                         <label class="text-dark" for="exampleFormControlInput1">Train Name</label>
-                        <input type="name" class="form-control" id="train-name" placeholder="Search For Trains">
+                        <input type="name" class="form-control" id="train-name" placeholder="Station Name">
                     </div>
                     <div class="form-group">
                         <label class="text-dark" for="exampleFormControlInput1">Destination</label>
@@ -69,10 +78,47 @@
                         <label class="text-dark" for="exampleFormControlInput1">Frequency</label>
                         <input type="name" class="form-control" id="frequency" placeholder="Mins">
                     </div>
-                    <a href="#" id='search' class="btn btn-primary ">Submit</a>
+
+                    <a href="" id='search' class="btn btn-success ">Submit</a>
                 </form>
+
             </div>
         </div>
+
+
+
+
+
+
+        <!-- UK Train Form
+        <div class="card bg-light d-none">
+            <div class="card-body ">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title text-dark d-inline">Add Train </h4>
+                    <button class="btn btn-success d-inline mb-2">Switch to Custom</button>
+                </div>
+                <form class="bg-light shadow-lg p-3 mb-2 mt-3 bg-white rounded">
+                    <div class="form-group">
+                        <label class="text-dark" for="exampleFormControlInput1">Station Name</label>
+                        <input type="name" class="form-control" id="station-name" placeholder="Find a Station">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-dark" for="exampleFormControlInput1">Destination</label>
+                        <input type="name" class="form-control" id="destination-uk" placeholder="Where are you going?">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="text-dark" for="exampleFormControlInput1">First Train Time</label>
+                        <input type="name" class="form-control" id="first-train" placeholder="HH:MM Military Time">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-dark" for="exampleFormControlInput1">Frequency</label>
+                        <input type="name" class="form-control" id="frequency" placeholder="Mins">
+                    </div> -->
+        <!-- <a href="#" id='submit' class="btn btn-success ">Submit</a>
+                </form>
+
+            </div>
+        </div> --> -->
 
 
     </div>
@@ -81,6 +127,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src='https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js'> </script>
     <script src="Assets/app.js"></script>
 </body>

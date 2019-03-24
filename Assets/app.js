@@ -10,13 +10,6 @@ firebase.initializeApp(config);
 
 database = firebase.database();
 
-const apiKey = "67997f00fbc415dd5ef417058e3e48ed";
-
-const apiId = 'e48b0eb8';
-
-var queryUrl = `http://transportapi.com/v3/uk/places.json?query=euston&type=train_station&app_id=${apiId}&app_key=${apiKey}`
-
-
 
 
 var trainName = '';
@@ -80,8 +73,11 @@ database.ref().on('child_added', function (childSnap) {
         $('<td>').text(destination),
         $('<td>').text(trainFrequency + ' minutes'),
         $('<td>').text(nextTrain.format("h:mm a")),
-        $('<td>').text(`${minutesUntilTrain} minutes`)
+        $('<td>').text(`${minutesUntilTrain} minutes`),
+        $('<td>').html('<i class = "fas fa-edit" >')
     );
+
+    newRow.addClass('row-edit')
 
     $("#train-schedule > tbody").append(newRow);
 })
@@ -90,7 +86,10 @@ database.ref().on('child_added', function (childSnap) {
 
 
 
+$(document).on('click', '.fa-edit', function () {
 
+
+})
 
 
 
@@ -102,25 +101,47 @@ database.ref().on('child_added', function (childSnap) {
 $(document).ready(function () {
 
 
+
+
     $('#search').click(function () {
-        trainName = $('#train-name').val().trim();
-        destination = $('#destination').val().trim();
-        firstTrain = $('#first-train').val().trim();
-        trainFrequency = $('#frequency').val().trim();
+        event.preventDefault();
+        if ($('#train-name').val() !== '' && $('#destination').val() !== '' &&
+            $('#first-train').val() !== '' && $('#frequency').val() !== '') {
+            trainName = $('#train-name').val().trim();
+            destination = $('#destination').val().trim();
+            firstTrain = $('#first-train').val().trim();
+            trainFrequency = $('#frequency').val().trim();
 
-        database.ref().push({
-            trainName: trainName,
-            destination: destination,
-            firstTrain: firstTrain,
-            trainFrequency: trainFrequency,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        })
+            database.ref().push({
+                trainName: trainName,
+                destination: destination,
+                firstTrain: firstTrain,
+                trainFrequency: trainFrequency,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+            })
 
-        $('#train-name').val(' ');
-        $('#destination').val(' ');
-        $('#first-train').val(' ');
-        $('#frequency').val(' ');
-
+            $('#train-name').val('');
+            $('#destination').val('');
+            $('#first-train').val('');
+            $('#frequency').val('');
+        }
     })
 
+
 })
+
+// $(document).on('click', '#submit', function () {
+
+//     var station = $('#station-name').val().trim();
+//     var destination = $('#destination-uk').val().trim();
+
+//     // queryUrl = `http://transportapi.com/v3/uk/train/station/tiplock:${station}/live.json?app_id=${apiId}&app_key=${apiKey}&darwin=false&destination=tiploc${destination}&train_status=passenger`;
+//     queryUrl = "https://transportapi.com/v3/uk/train/station/tiploc:watrloo/live.json?app_id=e48b0eb8&app_key=67997f00fbc415dd5ef417058e3e48ed&darwin=false&destination=tiploc:KNGX&train_status=passenger"
+//     $.ajax({
+//         url: queryUrl,
+//         method: "GET"
+//     }).then(function (response) {
+//         console.log(response)
+
+//     })
+// })
