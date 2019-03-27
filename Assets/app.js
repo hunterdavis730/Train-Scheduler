@@ -69,12 +69,12 @@ database.ref().on('child_added', function (childSnap) {
 
 
     var newRow = $("<tr>").append(
-        $('<td>').text(trainName),
-        $('<td>').text(destination),
-        $('<td>').text(trainFrequency + ' minutes'),
-        $('<td>').text(nextTrain.format("h:mm a")),
+        $('<td>').text(trainName).addClass('train-col'),
+        $('<td>').text(destination).addClass('dest-col'),
+        $('<td>').text(trainFrequency + ' minutes').addClass('freq-col'),
+        $('<td>').text(nextTrain.format("h:mm a")).addClass('next-col'),
         $('<td>').text(`${minutesUntilTrain} minutes`),
-        $('<td>').html('<i class = "fas fa-edit" >')
+
     );
 
     newRow.addClass('row-edit')
@@ -86,13 +86,41 @@ database.ref().on('child_added', function (childSnap) {
 
 
 
-$(document).on('click', '.fa-edit', function () {
+// $(document).on('click', '.fa-edit', function () {
+//     var value = $('.row-edit').attr('contenteditable');
+
+//     if (value == 'false') {
+//         $('.row-edit').attr('contenteditable', 'true');
+//     } else {
+//         $('.row-edit').attr('contenteditable', 'false')
+//     }
+
+//     var trainFrequency = parseInt($('.freq-col').val())
+
+//     var diffTime = moment().diff(moment(convertedFirstTrainSchedule), "minutes");
+//     console.log(diffTime)
+
+//     var timeRemaining = diffTime % trainFrequency;
+
+//     var minutesUntilTrain = trainFrequency - timeRemaining;
 
 
-})
+
+//     var nextTrain = moment().add(minutesUntilTrain, "minutes");
+
+// })
 
 
+// $("#mylabel").click(function () {
+//     var value = $('#editablediv').attr('contenteditable');
 
+//     if (value == 'false') {
+//         $('#editablediv').attr('contenteditable', 'true');
+//     }
+//     else {
+//         $('#editablediv').attr('contenteditable', 'false');
+//     }
+// });
 
 
 
